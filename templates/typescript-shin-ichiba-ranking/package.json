@@ -18,7 +18,7 @@
   "devDependencies": {
     "@akashic/akashic-cli-export": "1.7.7",
     "@akashic/akashic-cli-scan": "0.15.6",
-    "@akashic/akashic-engine": "~3.2.0",
+    "@akashic/akashic-engine": "~3.3.0",
     "@akashic/akashic-sandbox": "~0.17.35",
     "@akashic/headless-akashic": "^2.2.0",
     "@types/jest": "27.0.3",
