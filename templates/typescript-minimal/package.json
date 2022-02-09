@@ -16,8 +16,8 @@
   "author": "",
   "license": "",
   "devDependencies": {
-    "@akashic/akashic-cli-export": "1.7.13",
-    "@akashic/akashic-cli-scan": "0.15.11",
+    "@akashic/akashic-cli-export": "1.7.14",
+    "@akashic/akashic-cli-scan": "0.15.12",
     "@akashic/akashic-engine": "~3.3.0",
     "@akashic/akashic-sandbox": "~0.17.35",
     "@akashic/headless-akashic": "^2.2.0",
