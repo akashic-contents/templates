@@ -88,7 +88,7 @@ const typescriptCommands: Command[] = [
 			const index = await fsPromise.stat(join(path, "game", "index.html"));
 			return stat.isDirectory() && index.isFile();
 		}
-	},
+	}
 ];
 
 const templates: Template[] = [
