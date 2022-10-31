@@ -25,10 +25,6 @@ interface Command {
 	 */
 	args: string[];
 	/**
-	 * コマンドのタイムアウト時間のミリ秒。
-	 */
-	timeout?: number;
-	/**
 	 * コマンドの中止条件。
 	 * npm start など自発的に終了しないコマンドでのみ有効。
 	 */
@@ -43,23 +39,19 @@ const javascriptCommands: Command[] = [
 	{
 		command: "npm",
 		args: ["ci"],
-		timeout: 15000
 	},
 	{
 		command: "npm",
 		args: ["install"],
-		timeout: 15000
 	},
 	{
 		command: "npm",
 		args: ["start"],
 		until: checkSandboxRunning,
-		timeout: 10000
 	},
 	{
 		command: "npm",
 		args: ["run", "lint"],
-		timeout: 10000
 	}
 ];
 
@@ -68,22 +60,18 @@ const typescriptCommands: Command[] = [
 	{
 		command: "npm",
 		args: ["run", "build"],
-		timeout: 10000
 	},
 	{
 		command: "npm",
 		args: ["run", "update"],
-		timeout: 10000
 	},
 	{
 		command: "npm",
 		args: ["test"],
-		timeout: 10000
 	},
 	{
 		command: "npm",
 		args: ["run", "export-zip"],
-		timeout: 10000,
 		post: async (path) => {
 			const stat = await fsPromise.stat(join(path, "game.zip"));
 			return stat.isFile() && 0 < stat.size;
@@ -92,7 +80,6 @@ const typescriptCommands: Command[] = [
 	{
 		command: "npm",
 		args: ["run", "export-html"],
-		timeout: 10000,
 		post: async (path) => {
 			const stat = await fsPromise.stat(join(path, "game"));
 			const index = await fsPromise.stat(join(path, "game", "index.html"));
@@ -142,7 +129,7 @@ for (const { dir, commandMap } of templates) {
 	}
 }
 
-async function testWithCommand(path: string, { command, args, timeout, until, post }: Command): Promise<number> {
+async function testWithCommand(path: string, { command, args, until, post }: Command): Promise<number> {
 	let exitCode: number = 0;
 
 	const p = childProcess.spawn(
@@ -151,7 +138,7 @@ async function testWithCommand(path: string, { command, args, timeout, until, po
 		{
 			cwd: path,
 			detached: false,
-			timeout: timeout ?? TIMEOUT_COMMAND
+			timeout: TIMEOUT_COMMAND
 		}
 	);
 	p.stdout.on("data", (data) => {
