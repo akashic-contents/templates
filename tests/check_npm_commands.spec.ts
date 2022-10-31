@@ -10,6 +10,9 @@ const TIMEOUT_JEST = 60000;
 // 一つのコマンドのタイムアウト時間
 const TIMEOUT_COMMAND = 30000;
 
+// 各コマンドの実行結果を標準出力へ出力する
+const isDebug = process.env.NODE_ENV === "debug";
+
 interface Template {
 	dir: string;
 	commandMap: {[path: string]: Command[]};
@@ -112,8 +115,11 @@ for (const { dir, commandMap } of templates) {
 		const templateRelativeDir = join(dir, templateDir);
 
 		if (!commands) {
+			if (isDebug) {
+				console.warn(`commands of ${templateRelativeDir} not found, but skipping`);
+				continue;
+			}
 			throw new Error(`commands of ${templateRelativeDir} not found`);
-			// continue;
 		}
 
 		describe(`check npm commands in ${templateRelativeDir}`, () => {
@@ -141,12 +147,15 @@ async function testWithCommand(path: string, { command, args, until, post }: Com
 			timeout: TIMEOUT_COMMAND
 		}
 	);
-	p.stdout.on("data", (data) => {
-		// console.log(data.toString());
-	});
-	p.stderr.on("data", (data) => {
-		// console.log(data.toString());
-	});
+
+	if (isDebug) {
+		p.stdout.on("data", (data) => {
+			console.log(data.toString());
+		});
+		p.stderr.on("data", (data) => {
+			console.log(data.toString());
+		});
+	}
 
 	if (until) {
 		try {
@@ -169,8 +178,10 @@ async function testWithCommand(path: string, { command, args, until, post }: Com
 
 	if (!p.killed) {
 		// この時点で終了していなければ強制的に終了させる
-		p.stdout.destroy();
-		p.stderr.destroy();
+		if (isDebug) {
+			p.stdout.destroy();
+			p.stderr.destroy();
+		}
 		p.kill("SIGKILL");
 	}
 
