@@ -38,3 +38,10 @@ npm run generate
 npm run generate
 npm test
 ```
+
+環境変数 `NODE_ENV` に `"debug"` を指定することでコマンドテストの実行結果を標準出力へ出力します。
+
+```sh
+# Linux の場合
+NODE_ENV=debug npm test
+```

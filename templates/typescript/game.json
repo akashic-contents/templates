@@ -31,5 +31,6 @@
 	"moduleMainScripts": {},
 	"environment": {
 		"sandbox-runtime": "3"
-	}
+	},
+	"globalScripts": []
 }
