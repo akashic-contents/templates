@@ -116,7 +116,7 @@ for (const { dir, commandMap } of templates) {
 
 		if (!commands) {
 			if (isDebug) {
-				console.warn(`commands of ${templateRelativeDir} not found, but skipping`);
+				console.warn(`commands of ${templateRelativeDir} not found, but skipped`);
 				continue;
 			}
 			throw new Error(`commands of ${templateRelativeDir} not found`);
