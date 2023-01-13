@@ -19,7 +19,7 @@
     "@akashic/akashic-cli-export": "^1.7.51",
     "@akashic/akashic-cli-scan": "^0.16.0",
     "@akashic/akashic-engine": "^3.6.0",
-    "@akashic/akashic-sandbox": "^0.21.0",
+    "@akashic/akashic-sandbox": "^0.22.0",
     "@akashic/eslint-config": "^1.1.0",
     "@akashic/headless-akashic": "^3.0.0",
     "@types/jest": "^29.1.0",
