@@ -11,7 +11,7 @@ const TIMEOUT_JEST = 60000;
 const TIMEOUT_COMMAND = 30000;
 
 // 各コマンドの実行結果を標準出力へ出力する
-const isDebug = true;
+const isDebug = process.env.NODE_ENV === "debug";
 
 interface Template {
 	dir: string;
