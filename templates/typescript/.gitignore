@@ -3,4 +3,3 @@ node_modules
 /game
 coverage
 game.zip
-package-lock.json
