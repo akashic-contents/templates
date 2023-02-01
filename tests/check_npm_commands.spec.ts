@@ -41,11 +41,7 @@ interface Command {
 const javascriptCommands: Command[] = [
 	{
 		command: "npm",
-		args: ["ci"],
-	},
-	{
-		command: "npm",
-		args: ["install"],
+		args: ["install", "--no-package-lock"],
 	},
 	{
 		command: "npm",

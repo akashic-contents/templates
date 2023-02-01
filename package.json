@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "description": "Templates for starting to create new Akashic Engine game",
   "scripts": {
-    "postinstall": "lerna bootstrap",
+    "postinstall": "lerna bootstrap --no-ci",
     "generate": "run-s generate:**",
     "generate:zips": "ts-node ./scripts/generate_zips.ts",
     "test": "run-s test:**",
