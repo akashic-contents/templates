@@ -7,7 +7,6 @@ module.exports = {
   },
   "globals": {
     "window": false,
-    "RPGAtsumaru": false,
     "g": false
   },
   "rules": {

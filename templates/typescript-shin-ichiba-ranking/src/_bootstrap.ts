@@ -1,8 +1,6 @@
 // 通常このファイルを編集する必要はありません。ゲームの処理は main.js に記述してください
 import { main } from "./main";
-import { GameMainParameterObject, RPGAtsumaruWindow } from "./parameterObject";
-
-declare const window: RPGAtsumaruWindow;
+import { GameMainParameterObject } from "./parameterObject";
 
 export = (originalParam: g.GameMainParameterObject) => {
 	const param: any = {} as GameMainParameterObject;
@@ -11,8 +9,6 @@ export = (originalParam: g.GameMainParameterObject) => {
 	});
 	// セッションパラメーター
 	param.sessionParameter = {};
-	// コンテンツが動作している環境がゲームアツマール上かどうか
-	param.isAtsumaru = typeof window !== "undefined" && typeof window.RPGAtsumaru !== "undefined";
 	// 乱数生成器
 	param.random = g.game.random;
 
