@@ -1,6 +1,4 @@
-import { GameMainParameterObject, RPGAtsumaruWindow } from "./parameterObject";
-
-declare const window: RPGAtsumaruWindow;
+import { GameMainParameterObject } from "./parameterObject";
 
 export function main(param: GameMainParameterObject): void {
 	const scene = new g.Scene({
@@ -106,13 +104,6 @@ export function main(param: GameMainParameterObject): void {
 		});
 		const updateHandler = (): void => {
 			if (time <= 0) {
-				// ゲームアツマール環境であればランキングを表示します
-				if (param.isAtsumaru) {
-					const boardId = 1;
-					window.RPGAtsumaru.experimental.scoreboards.setRecord(boardId, g.game.vars.gameState.score).then(function() {
-						window.RPGAtsumaru.experimental.scoreboards.display(boardId);
-					});
-				}
 				scene.onUpdate.remove(updateHandler); // カウントダウンを止めるためにこのイベントハンドラを削除します
 			}
 			// カウントダウン処理

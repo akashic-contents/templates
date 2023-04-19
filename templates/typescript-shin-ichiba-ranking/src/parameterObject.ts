@@ -5,10 +5,5 @@ export interface GameMainParameterObject extends g.GameMainParameterObject {
 		difficulty?: number;
 		randomSeed?: number;
 	};
-	isAtsumaru: boolean;
 	random: g.RandomGenerator;
-}
-
-export interface RPGAtsumaruWindow {
-	RPGAtsumaru?: any;
 }

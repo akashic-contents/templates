@@ -6,8 +6,6 @@ module.exports = function (originalParam) {
     });
     // セッションパラメーター
     param.sessionParameter = {};
-    // コンテンツが動作している環境がゲームアツマール上かどうか
-    param.isAtsumaru = typeof window !== "undefined" && typeof window.RPGAtsumaru !== "undefined";
     // 乱数生成器
     param.random = g.game.random;
     var limitTickToWait = 3; // セッションパラメーターが来るまでに待つtick数

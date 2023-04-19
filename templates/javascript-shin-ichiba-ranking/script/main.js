@@ -93,13 +93,6 @@ function main(param) {
         });
         var updateHandler = function () {
             if (time <= 0) {
-                // ゲームアツマール環境であればランキングを表示します
-                if (param.isAtsumaru) {
-                    var boardId_1 = 1;
-                    window.RPGAtsumaru.experimental.scoreboards.setRecord(boardId_1, g.game.vars.gameState.score).then(function () {
-                        window.RPGAtsumaru.experimental.scoreboards.display(boardId_1);
-                    });
-                }
                 scene.onUpdate.remove(updateHandler); // カウントダウンを止めるためにこのイベントハンドラを削除します
             }
             // カウントダウン処理
