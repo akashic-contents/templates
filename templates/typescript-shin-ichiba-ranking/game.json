@@ -20,7 +20,13 @@
 			"type": "audio",
 			"path": "audio/se",
 			"systemId": "sound",
-			"duration": 250
+			"duration": 250,
+			"hint": {
+				"extensions": [
+					".aac",
+					".ogg"
+				]
+			}
 		},
 		"_bootstrap": {
 			"type": "script",

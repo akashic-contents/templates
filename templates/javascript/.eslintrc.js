@@ -3,8 +3,8 @@ module.exports = {
     "commonjs": true
   },
   "parserOptions": {
-    ecmaVersion: 6,
-    sourceType: "module"
+    "ecmaVersion": 6,
+    "sourceType": "module"
   },
   "globals": {
     "window": false,
