@@ -28,11 +28,11 @@ describe("mainScene", () => {
 
 		// ゲーム画面をクリックすると弾 (g.Sprite) が生成されることを確認
 		client.sendPointDown(Math.ceil(Math.random() * game.width), Math.ceil(Math.random() * game.height), 0);
-		context.step();
+		await context.step();
 		expect(scene.children.length).toBe(2);
 
 		client.sendPointDown(Math.ceil(Math.random() * game.width), Math.ceil(Math.random() * game.height), 0);
-		context.step();
+		await context.step();
 		expect(scene.children.length).toBe(3);
 
 		// 時間が十分に経ったらすべての弾が消えていることを確認

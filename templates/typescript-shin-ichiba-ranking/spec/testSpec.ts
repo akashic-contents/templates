@@ -26,7 +26,7 @@ describe("mainScene", () => {
 		expect(scene.children.length).toBe(3);
 
 		// 初期スコア、時間の値を確認
-		context.step();
+		await context.step();
 		const scoreLabel = scene.children[1] as g.Label;
 		expect(scoreLabel.text).toBe("SCORE: 0");
 
@@ -35,11 +35,11 @@ describe("mainScene", () => {
 
 		// ゲーム画面をクリックすると弾 (g.Sprite) が生成されることを確認
 		client.sendPointDown(Math.ceil(Math.random() * game.width), Math.ceil(Math.random() * game.height), 0);
-		context.step();
+		await context.step();
 		expect(scene.children.length).toBe(4);
 
 		client.sendPointDown(Math.ceil(Math.random() * game.width), Math.ceil(Math.random() * game.height), 0);
-		context.step();
+		await context.step();
 		expect(scene.children.length).toBe(5);
 
 		// 2 回クリックされた時のスコアの値を確認
