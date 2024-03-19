@@ -23,7 +23,7 @@ describe("mainScene", () => {
 		expect(scene.children.length).toBe(1);
 		// 初期状態で子要素(g.FilledRect) の x 座標は 0
 		expect(scene.children[0].x).toBe(0);
-		context.step();
+		await context.step();
 		// 1 フレーム進んだ時、子要素(g.FilledRect) の x 座標が 1 進んでいることを確認
 		expect(scene.children[0].x).toBe(1);
 
@@ -31,7 +31,7 @@ describe("mainScene", () => {
 		await context.advance(42630);
 		expect(scene.children[0].x).toBe(game.width);
 
-		context.step();
+		await context.step();
 		expect(scene.children[0].x).toBe(0);
 
 		await context.destroy();
