@@ -39,7 +39,10 @@
 		"nicolive": {
 			"supportedModes": [
 				"ranking"
-			]
+			],
+			"preferredSessionParameters": {
+				"totalTimeLimit": 60
+			}
 		}
 	}
 }
