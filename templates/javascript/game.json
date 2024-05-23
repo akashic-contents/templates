@@ -28,7 +28,6 @@
 			"global": true
 		}
 	},
-	"moduleMainScripts": {},
 	"environment": {
 		"sandbox-runtime": "3"
 	}

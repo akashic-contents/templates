@@ -44,7 +44,6 @@
 			"global": true
 		}
 	},
-	"moduleMainScripts": {},
 	"environment": {
 		"sandbox-runtime": "3",
 		"nicolive": {
@@ -52,7 +51,7 @@
 				"ranking"
 			],
 			"preferredSessionParameters": {
-				"totalTimeLimit": 60
+				"totalTimeLimit": 82
 			}
 		}
 	},
