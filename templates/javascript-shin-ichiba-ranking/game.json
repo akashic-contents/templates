@@ -33,13 +33,15 @@
 			"global": true
 		}
 	},
-	"moduleMainScripts": {},
 	"environment": {
 		"sandbox-runtime": "3",
 		"nicolive": {
 			"supportedModes": [
 				"ranking"
-			]
+			],
+			"preferredSessionParameters": {
+				"totalTimeLimit": 82
+			}
 		}
 	}
 }
