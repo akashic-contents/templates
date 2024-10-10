@@ -1,25 +1,25 @@
 
 exports.main = void 0;
 function main(param) {
-    var scene = new g.Scene({
+    const scene = new g.Scene({
         game: g.game,
         // このシーンで利用するアセットのIDを列挙し、シーンに通知します
         assetIds: ["player", "shot", "se"]
     });
-    var time = 60; // 制限時間
+    let time = 60; // 制限時間
     if (param.sessionParameter.totalTimeLimit) {
         time = param.sessionParameter.totalTimeLimit; // セッションパラメータで制限時間が指定されたらその値を使用します
     }
     // 市場コンテンツのランキングモードでは、g.game.vars.gameState.score の値をスコアとして扱います
     g.game.vars.gameState = { score: 0 };
-    scene.onLoad.add(function () {
+    scene.onLoad.add(() => {
         // ここからゲーム内容を記述します
         // 各アセットオブジェクトを取得します
-        var playerImageAsset = scene.asset.getImageById("player");
-        var shotImageAsset = scene.asset.getImageById("shot");
-        var seAudioAsset = scene.asset.getAudioById("se");
+        const playerImageAsset = scene.asset.getImageById("player");
+        const shotImageAsset = scene.asset.getImageById("shot");
+        const seAudioAsset = scene.asset.getAudioById("se");
         // プレイヤーを生成します
-        var player = new g.Sprite({
+        const player = new g.Sprite({
             scene: scene,
             src: playerImageAsset,
             width: playerImageAsset.width,
@@ -28,7 +28,7 @@ function main(param) {
         // プレイヤーの初期座標を、画面の中心に設定します
         player.x = (g.game.width - player.width) / 2;
         player.y = (g.game.height - player.height) / 2;
-        player.onUpdate.add(function () {
+        player.onUpdate.add(() => {
             // 毎フレームでY座標を再計算し、プレイヤーの飛んでいる動きを表現します
             // ここではMath.sinを利用して、時間経過によって増加するg.game.ageと組み合わせて
             player.y = (g.game.height - player.height) / 2 + Math.sin(g.game.age % (g.game.fps * 10) / 4) * 10;
@@ -37,13 +37,13 @@ function main(param) {
         });
         scene.append(player);
         // フォントの生成
-        var font = new g.DynamicFont({
+        const font = new g.DynamicFont({
             game: g.game,
             fontFamily: "sans-serif",
             size: 48
         });
         // スコア表示用のラベル
-        var scoreLabel = new g.Label({
+        const scoreLabel = new g.Label({
             scene: scene,
             text: "SCORE: 0",
             font: font,
@@ -52,7 +52,7 @@ function main(param) {
         });
         scene.append(scoreLabel);
         // 残り時間表示用ラベル
-        var timeLabel = new g.Label({
+        const timeLabel = new g.Label({
             scene: scene,
             text: "TIME: 0",
             font: font,
@@ -62,7 +62,7 @@ function main(param) {
         });
         scene.append(timeLabel);
         // 画面をタッチしたとき、SEを鳴らします
-        scene.onPointDownCapture.add(function () {
+        scene.onPointDownCapture.add(() => {
             // 制限時間以内であればタッチ1回ごとにSCOREに+1します
             if (time > 0) {
                 g.game.vars.gameState.score++;
@@ -71,7 +71,7 @@ function main(param) {
             }
             seAudioAsset.play();
             // プレイヤーが発射する弾を生成します
-            var shot = new g.Sprite({
+            const shot = new g.Sprite({
                 scene: scene,
                 src: shotImageAsset,
                 width: shotImageAsset.width,
@@ -80,7 +80,7 @@ function main(param) {
             // 弾の初期座標を、プレイヤーの少し右に設定します
             shot.x = player.x + player.width;
             shot.y = player.y;
-            shot.onUpdate.add(function () {
+            shot.onUpdate.add(() => {
                 // 毎フレームで座標を確認し、画面外に出ていたら弾をシーンから取り除きます
                 if (shot.x > g.game.width)
                     shot.destroy();
@@ -91,7 +91,7 @@ function main(param) {
             });
             scene.append(shot);
         });
-        var updateHandler = function () {
+        const updateHandler = () => {
             if (time <= 0) {
                 scene.onUpdate.remove(updateHandler); // カウントダウンを止めるためにこのイベントハンドラを削除します
             }
