@@ -1,4 +1,4 @@
-import { GameMainParameterObject } from "./parameterObject";
+import type { GameMainParameterObject } from "./parameterObject";
 
 export function main(param: GameMainParameterObject): void {
 	const scene = new g.Scene({
