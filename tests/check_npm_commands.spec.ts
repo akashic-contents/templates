@@ -11,7 +11,7 @@ const TIMEOUT_JEST = 60000;
 const TIMEOUT_COMMAND = 30000;
 
 // 各コマンドの実行結果を標準出力へ出力する
-const isDebug = process.env.NODE_ENV === "debug";
+const isDebug = true; // process.env.NODE_ENV === "debug";
 
 interface Template {
 	dir: string;
@@ -123,6 +123,7 @@ for (const { dir, commandMap } of templates) {
 				const slug = `${command.command} ${command.args.join(" ")}`;
 				const label = `${templateRelativeDir}: ${slug}`
 				it(`test "${label}"`, async () => {
+					console.log(`---- ${label}, ${templateRelativeDir}`);
 					const exitCode = await testWithCommand(templateRelativeDir, command);
 					expect(exitCode).toBe(0);
 				}, TIMEOUT_JEST);
@@ -146,10 +147,10 @@ async function testWithCommand(path: string, { command, args, until, post }: Com
 
 	if (isDebug) {
 		p.stdout.on("data", (data) => {
-			console.log(data.toString());
+			console.log("+", data.toString());
 		});
 		p.stderr.on("data", (data) => {
-			console.log(data.toString());
+			console.log("*", data.toString());
 		});
 	}
 
