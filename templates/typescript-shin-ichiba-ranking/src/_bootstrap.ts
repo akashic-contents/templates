@@ -1,6 +1,6 @@
 // 通常このファイルを編集する必要はありません。ゲームの処理は main.js に記述してください
 import { main } from "./main";
-import type { GameMainParameterObject } from "./parameterObject";
+import { GameMainParameterObject } from "./parameterObject";
 
 export = (originalParam: g.GameMainParameterObject) => {
 	const param: any = {} as GameMainParameterObject;

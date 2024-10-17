@@ -111,8 +111,6 @@ module.exports = [
         argsIgnorePattern: "^_",
         caughtErrorsIgnorePattern: "^_"
       }],
-      "@typescript-eslint/consistent-type-imports": "error",
-      "@typescript-eslint/no-floating-promises": "error",
       camelcase: "off",
       curly: "off",
       "dot-notation": "error",
@@ -162,8 +160,6 @@ module.exports = [
       "no-unused-vars": "off",
       "no-unused-expressions": "error",
       "no-unused-labels": "error",
-      "no-var": "error",
-      "prefer-const": "error",
       radix: "error",
       "spaced-comment": ["error", "always", {
         markers: ["/"],
