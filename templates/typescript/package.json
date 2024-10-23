@@ -8,7 +8,7 @@
     "build": "rimraf ./script && tsc && akashic-cli-scan asset script",
     "update": "akashic-cli-scan asset && akashic-cli-scan globalScripts",
     "lint": "eslint \"src/**/*.ts\" --fix",
-    "start": "akashic-sandbox .",
+    "start": "akashic-cli-sandbox .",
     "export-zip": "rimraf game.zip && akashic-cli-export zip -o game.zip -s",
     "export-html": "rimraf game && akashic-cli-export html -o game",
     "test": "jest"
@@ -19,7 +19,7 @@
     "@akashic/akashic-cli-export": "^1.7.51",
     "@akashic/akashic-cli-scan": "^0.17.0",
     "@akashic/akashic-engine": "^3.6.0",
-    "@akashic/akashic-sandbox": "^0.28.0",
+    "@akashic/akashic-cli-sandbox": "~1.1.9",
     "@akashic/headless-akashic": "^4.0.0",
     "@stylistic/eslint-plugin-ts": "^2.9.0",
     "@types/jest": "^29.1.0",
