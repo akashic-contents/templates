@@ -1,0 +1,95 @@
+{
+	"width": 1280,
+	"height": 720,
+	"fps": 30,
+	"main": "./script/main.js",
+	"assets": {
+		"player": {
+			"type": "image",
+			"width": 32,
+			"height": 32,
+			"path": "image/player.png"
+		},
+		"shot": {
+			"type": "image",
+			"width": 16,
+			"height": 16,
+			"path": "image/shot.png"
+		},
+		"se": {
+			"type": "audio",
+			"path": "audio/se",
+			"systemId": "sound",
+			"duration": 250,
+			"hint": {
+				"extensions": [
+					".aac",
+					".ogg"
+				]
+			}
+		},
+		"main": {
+			"type": "script",
+			"path": "script/main.js",
+			"global": true
+		},
+		"gameScene": {
+			"type": "script",
+			"path": "script/gameScene.js",
+			"global": true
+		},
+		"recruitmentScene": {
+			"type": "script",
+			"path": "script/recruitmentScene.js",
+			"global": true
+		},
+		"resultScene": {
+			"type": "script",
+			"path": "script/resultScene.js",
+			"global": true
+		},
+		"config": {
+			"type": "script",
+			"path": "script/config.js",
+			"global": true
+		},
+		"gameScore": {
+			"type": "script",
+			"path": "script/gameScore.js",
+			"global": true
+		},
+		"game_config": {
+			"type": "text",
+			"path": "text/game_config.json",
+			"global": true
+		}
+	},
+	"environment": {
+		"sandbox-runtime": "3",
+		"nicolive": {
+			"supportedModes": [
+				"ranking"
+			],
+			"preferredSessionParameters": {
+				"totalTimeLimit": 82
+			}
+		},
+		"external": {
+			"coeLimited": "0"
+		}
+	},
+	"globalScripts": [
+		"node_modules/@akashic-extension/akashic-hover-plugin/lib/Converter.js",
+		"node_modules/@akashic-extension/akashic-hover-plugin/lib/HoverPlugin.js",
+		"node_modules/@akashic-extension/akashic-hover-plugin/lib/index.js",
+		"node_modules/@akashic-extension/resolve-player-info/lib/FallbackDialog.js",
+		"node_modules/@akashic-extension/resolve-player-info/lib/index.js",
+		"node_modules/@akc29/akashictool4multi/lib/entry.js",
+		"node_modules/@akc29/akashictool4multi/lib/index.js"
+	],
+	"moduleMainScripts": {
+		"@akashic-extension/akashic-hover-plugin": "node_modules/@akashic-extension/akashic-hover-plugin/lib/index.js",
+		"@akashic-extension/resolve-player-info": "node_modules/@akashic-extension/resolve-player-info/lib/index.js",
+		"@akc29/akashictool4multi": "node_modules/@akc29/akashictool4multi/lib/index.js"
+	}
+}
