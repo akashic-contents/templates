@@ -1,6 +1,7 @@
 import * as tool from "@akc29/akashictool4multi";
 import { GameScore } from "./gameScore";
 import { createResultScene } from "./resultScene";
+import { createButtonEntity } from "./util/buttonEntity";
 
 interface GameSceneParameterObject {
 	members: tool.PlayerInfo[];
@@ -90,7 +91,24 @@ export function createGameScene(params: GameSceneParameterObject): g.Scene {
 			local: true
 		});
 		scene.append(personalScoreLabel);
-		scene.append(createGameController(scene, font));
+		const scoreUpButton = createButtonEntity({
+			scene,
+			width: 0.2 * g.game.width,
+			height: 0.1 * g.game.height,
+			x: 0.77 * g.game.width,
+			y: 0.87 * g.game.height,
+			local: true,
+			text: "SCORE UP",
+			font,
+			fontSize: 32,
+			rectColor: "yellow",
+			textColor: "black",
+			pushEvent: () => {
+				g.game.raiseEvent(new g.MessageEvent({ message: "SCOREUP" }));
+				scene.asset.getAudioById("se").play();
+			}
+		});
+		scene.append(scoreUpButton);
 		scene.onUpdate.add(() => {
 			if (time <= 0) {
 				g.game.replaceScene(createResultScene(gameScore));
@@ -183,36 +201,4 @@ function createPlayer(scene: g.Scene, font: g.Font, info: tool.PlayerInfo): Play
 		point,
 		angle
 	};
-}
-
-function createGameController(scene: g.Scene, font: g.Font): g.E {
-	const button = new g.FilledRect({
-		scene,
-		cssColor: "yellow",
-		x: 0.77 * g.game.width,
-		y: 0.87 * g.game.height,
-		width: 0.2 * g.game.width,
-		height: 0.1 * g.game.height,
-		opacity: 0.5,
-		local: true,
-		touchable: true
-	});
-	const label = new g.Label({
-		scene,
-		text: "SCORE UP",
-		font,
-		fontSize: 32,
-		textColor: "black",
-		textAlign: "center",
-		width: 0.2 * g.game.width,
-		y: 0.05 * button.height,
-		local: true
-	});
-	button.onPointUp.add(() => {
-		g.game.raiseEvent(new g.MessageEvent({ message: "SCOREUP" }));
-		scene.asset.getAudioById("se").play();
-	});
-	button.append(label);
-
-	return button;
 }

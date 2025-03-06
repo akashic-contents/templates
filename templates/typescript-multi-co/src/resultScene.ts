@@ -1,6 +1,7 @@
 import { config } from "./config";
 import { GameScore } from "./gameScore";
 import { createRecruitmentScene } from "./recruitmentScene";
+import { createButtonEntity } from "./util/buttonEntity";
 
 export function createResultScene(gameScore: GameScore): g.Scene {
 	const scene = new g.Scene({ game: g.game });
@@ -38,7 +39,22 @@ export function createResultScene(gameScore: GameScore): g.Scene {
 		// 放送者のみplaylogにスコアを残す
 		if (g.game.joinedPlayerIds.find(id => id === g.game.selfId)) {
 			g.game.raiseEvent(new g.MessageEvent({ message: "GAME_RESULT", title: config.title, gameScore }));
-			scene.append(createResetButton(scene, font));
+			scene.append(createButtonEntity({
+				scene,
+				width: 0.2 * g.game.width,
+				height: 0.1 * g.game.height,
+				x: 0.77 * g.game.width,
+				y: 0.87 * g.game.height,
+				local: true,
+				text: "RESET",
+				font,
+				fontSize: 32,
+				rectColor: "yellow",
+				textColor: "black",
+				pushEvent: () => {
+					g.game.raiseEvent(new g.MessageEvent({ message: "RESET" }));
+				}
+			}));
 		}
 		scene.onMessage.add((ev) => {
 			if (!ev.data || !ev.data.message) {
@@ -50,35 +66,4 @@ export function createResultScene(gameScore: GameScore): g.Scene {
 		});
 	});
 	return scene;
-}
-
-function createResetButton(scene: g.Scene, font: g.Font): g.E {
-	const button = new g.FilledRect({
-		scene,
-		cssColor: "yellow",
-		x: 0.77 * g.game.width,
-		y: 0.87 * g.game.height,
-		width: 0.2 * g.game.width,
-		height: 0.1 * g.game.height,
-		opacity: 0.5,
-		local: true,
-		touchable: true
-	});
-	const label = new g.Label({
-		scene,
-		text: "RESET",
-		font,
-		fontSize: 32,
-		textColor: "black",
-		textAlign: "center",
-		width: 0.2 * g.game.width,
-		y: 0.05 * button.height,
-		local: true
-	});
-	button.onPointUp.add(() => {
-		g.game.raiseEvent(new g.MessageEvent({ message: "RESET" }));
-	});
-	button.append(label);
-
-	return button;
 }

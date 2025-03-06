@@ -1,6 +1,7 @@
 import * as tool from "@akc29/akashictool4multi";
 import { createGameScene } from "./gameScene";
 import { config } from "./config";
+import { createButtonEntity } from "./util/buttonEntity";
 
 interface RecruitmentSceneParameterObject {
 	/**
@@ -24,9 +25,10 @@ export function createRecruitmentScene(params: RecruitmentSceneParameterObject):
 	const scene: g.Scene = new g.Scene({
 		game: g.game
 	});
+	const playableLimit = params.playableLimit ?? 10;
 	const entry = new tool.AkashicEntry({
 		scene,
-		playableLimit: params.playableLimit ?? 10,
+		playableLimit,
 		startableCount: params.startableCount ?? 1,
 		premiumuRate: params.premiumuRate ?? 1,
 		callbackAfterDicision: (members: tool.PlayerInfo[]) => {
@@ -34,7 +36,7 @@ export function createRecruitmentScene(params: RecruitmentSceneParameterObject):
 		}
 	});
 	scene.onLoad.add(() => {
-		const contributerPane = createContributerPane(scene, entry);
+		const contributerPane = createContributerPane(scene, entry, playableLimit);
 		const audiencePane = createAudiencePane(scene, entry);
 		let isJoined: boolean = false;
 		scene.append(audiencePane);
@@ -48,10 +50,13 @@ export function createRecruitmentScene(params: RecruitmentSceneParameterObject):
 					isJoined = true;
 					scene.remove(audiencePane);
 					scene.append(contributerPane);
-					entry.enter({
-						id: g.game.selfId,
-						name: "player" + g.game.selfId
-					}, true);
+					// 少し待たないとraiseEventできない場合があるため
+					scene.setTimeout(() => {
+						entry.enter({
+							id: g.game.selfId,
+							name: "player" + g.game.selfId
+						}, true);
+					}, 500);
 				}
 			} else {
 				if (isJoined) {
@@ -67,7 +72,7 @@ export function createRecruitmentScene(params: RecruitmentSceneParameterObject):
 	return scene;
 }
 
-function createContributerPane(scene: g.Scene, entry: tool.AkashicEntry): g.Pane {
+function createContributerPane(scene: g.Scene, entry: tool.AkashicEntry, playableLimit: number): g.Pane {
 	const pane = new g.Pane({
 		scene,
 		width: g.game.width,
@@ -83,7 +88,7 @@ function createContributerPane(scene: g.Scene, entry: tool.AkashicEntry): g.Pane
 	pane.append(entryCountLabel);
 	const limitLabel = new g.Label({
 		scene,
-		text: "参加可能人数：",
+		text: `参加可能人数： ${playableLimit}名`,
 		font,
 		fontSize: 20,
 		textColor: "black",
@@ -93,32 +98,24 @@ function createContributerPane(scene: g.Scene, entry: tool.AkashicEntry): g.Pane
 		local: true
 	});
 	pane.append(limitLabel);
-	const startButton = new g.FilledRect({
+	const startButton = createButtonEntity({
 		scene,
-		cssColor: "gray",
-		x: 0.4 * g.game.width,
-		y: 0.8 * g.game.height,
 		width: 0.2 * g.game.width,
 		height: 0.1 * g.game.height,
-		opacity: 0.5,
+		x: 0.4 * g.game.width,
+		y: 0.8 * g.game.height,
 		local: true,
-		touchable: true
-	});
-	const startLabel = new g.Label({
-		scene,
-		text: "ゲーム開始",
+		text: "GAME START!!",
 		font,
 		fontSize: 24,
+		rectColor: "yellow",
 		textColor: "black",
-		textAlign: "center",
-		width: 0.2 * g.game.width,
-		y: 0.05 * startButton.height,
-		local: true
+		available: entry.isAbleToStart(),
+		pushEvent: () => {
+			entry.decidePlayableMembers();
+		},
+		isAvailable: () => entry.isAbleToStart()
 	});
-	startButton.onPointUp.add(() => {
-		entry.decidePlayableMembers();
-	});
-	startButton.append(startLabel);
 	pane.append(startButton);
 
 	return pane;
@@ -138,6 +135,7 @@ function createAudiencePane(scene: g.Scene, entry: tool.AkashicEntry): g.Pane {
 	});
 	const entryCountLabel = createEntryCountLabel(scene, entry, font);
 	pane.append(entryCountLabel);
+
 	const entryButton = new g.FilledRect({
 		scene,
 		cssColor: "gray",
@@ -145,13 +143,12 @@ function createAudiencePane(scene: g.Scene, entry: tool.AkashicEntry): g.Pane {
 		y: 0.6 * g.game.height,
 		width: 0.2 * g.game.width,
 		height: 0.1 * g.game.height,
-		opacity: 0.5,
 		local: true,
 		touchable: true
 	});
 	const entryLabel = new g.Label({
 		scene,
-		text: "ゲームに参加",
+		text: "ゲームに参加する",
 		font,
 		fontSize: 20,
 		textColor: "white",
@@ -160,10 +157,19 @@ function createAudiencePane(scene: g.Scene, entry: tool.AkashicEntry): g.Pane {
 		y: 0.05 * entryButton.height,
 		local: true
 	});
+	entryButton.onPointDown.add(() => {
+		entryButton.opacity = 0.5;
+		entryButton.modified();
+	});
 	entryButton.onPointUp.add(() => {
+		cancelButton.touchable = true;
+		cancelButton.modified();
+		entryButton.touchable = false;
 		entryButton.cssColor = "yellow";
+		entryButton.opacity = 1;
 		entryButton.modified();
 		entryLabel.textColor = "red";
+		entryLabel.text = "参加予約済み";
 		entryLabel.invalidate();
 		entry.enter({
 			id: g.game.selfId,
@@ -179,9 +185,7 @@ function createAudiencePane(scene: g.Scene, entry: tool.AkashicEntry): g.Pane {
 		y: 0.6 * g.game.height,
 		width: 0.2 * g.game.width,
 		height: 0.1 * g.game.height,
-		opacity: 0.5,
-		local: true,
-		touchable: true
+		local: true
 	});
 	const cancelLabel = new g.Label({
 		scene,
@@ -194,10 +198,19 @@ function createAudiencePane(scene: g.Scene, entry: tool.AkashicEntry): g.Pane {
 		y: 0.05 * cancelButton.height,
 		local: true
 	});
+	cancelButton.onPointDown.add(() => {
+		cancelButton.opacity = 0.5;
+		cancelButton.modified();
+	});
 	cancelButton.onPointUp.add(() => {
+		cancelButton.opacity = 1;
+		cancelButton.touchable = false;
+		cancelButton.modified();
 		entryButton.cssColor = "gray";
+		entryButton.touchable = true;
 		entryButton.modified();
 		entryLabel.textColor = "white";
+		entryLabel.text = "ゲームに参加する";
 		entryLabel.invalidate();
 		entry.cancel(g.game.selfId);
 	});
@@ -211,7 +224,7 @@ function createEntryCountLabel(scene: g.Scene, entry: tool.AkashicEntry, font: g
 	let entryCount = entry.getEnteredMenmberCount();
 	const entryCountLabel = new g.Label({
 		scene,
-		text: "参加人数: " + entryCount,
+		text: `参加人数: ${entryCount}名`,
 		font,
 		fontSize: 28,
 		textColor: "black",
@@ -223,7 +236,7 @@ function createEntryCountLabel(scene: g.Scene, entry: tool.AkashicEntry, font: g
 	entryCountLabel.onUpdate.add(() => {
 		if (entryCount !== entry.getEnteredMenmberCount()) {
 			entryCount = entry.getEnteredMenmberCount();
-			entryCountLabel.text = "参加人数: " + entryCount;
+			entryCountLabel.text = `参加人数: ${entryCount}名`;
 			entryCountLabel.invalidate();
 		}
 	});
