@@ -21,7 +21,7 @@
     "@akashic/akashic-engine": "^3.6.0",
     "@akashic/akashic-cli-sandbox": "~1.1.9",
     "@akashic/headless-akashic": "^4.0.0",
-    "@stylistic/eslint-plugin-ts": "^3.0.0",
+    "@stylistic/eslint-plugin-ts": "^4.0.0",
     "@types/jest": "^29.1.0",
     "@typescript-eslint/eslint-plugin": "^8.9.0",
     "@typescript-eslint/parser": "^8.9.0",
