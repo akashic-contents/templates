@@ -1,10 +1,10 @@
-const typescriptEslint = require("@typescript-eslint/eslint-plugin");
-const importPlugin = require("eslint-plugin-import");
-const globals = require("globals");
-const tsParser = require("@typescript-eslint/parser");
-const stylisticTs = require("@stylistic/eslint-plugin-ts");
+import typescriptEslint from "@typescript-eslint/eslint-plugin";
+import importPlugin from "eslint-plugin-import";
+import globals from "globals";
+import tsParser from "@typescript-eslint/parser";
+import stylisticTs from "@stylistic/eslint-plugin-ts";
 
-module.exports = [
+export default [
   {
     ignores: ["**/*.js"],
   },
