@@ -21,7 +21,7 @@ const templateDir = path.join(__dirname, "..", "templates");
 	process.exitCode = 1;
 });
 
-async function install(cwd: string): Promise<any> {
+async function install(cwd: string): Promise<void> {
 	console.log(`installing ${path.basename(cwd)}...`);
 	await exec("npm install --no-package-lock", { cwd, encoding: "utf-8" });
 }
