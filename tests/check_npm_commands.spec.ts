@@ -1,5 +1,4 @@
 import * as childProcess from "child_process";
-import fetch from "node-fetch";
 import * as fs from "fs";
 import * as fsPromise from "fs/promises";
 import { join } from "path";
@@ -10,7 +9,7 @@ const TIMEOUT_JEST = 60000;
 // 一つのコマンドのタイムアウト時間
 const TIMEOUT_COMMAND = 30000;
 
-// 各コマンドの実行結果を標準出力へ出力する
+// 各コマンドの実行結果を標準出力へ出力するデバッグオプション
 const isDebug = process.env.NODE_ENV === "debug";
 
 interface Template {
@@ -197,7 +196,7 @@ async function testWithCommand(path: string, { command, args, until, post }: Com
 }
 
 function waitUntil(interval: number, callback: () => Promise<boolean>, timeout: number = TIMEOUT_JEST) {
-	const now = Date.now();
+	const now = performance.now();
 	const until = now + timeout;
 	return new Promise<void>((resolve, reject) => {
 		const timer = setInterval(async () => {
@@ -206,7 +205,7 @@ function waitUntil(interval: number, callback: () => Promise<boolean>, timeout: 
 					clearInterval(timer);
 					resolve();
 				}
-				if (until < Date.now()) {
+				if (until < performance.now()) {
 					throw new Error("waitUntil(): process timeout");
 				}
 			} catch (e) {

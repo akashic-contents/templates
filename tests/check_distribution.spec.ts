@@ -12,19 +12,20 @@ if (!templateZipPaths || !templateZipPaths.length) {
 	throw new Error("distribution does not exist.");
 }
 
-describe("check distribution", () => {
-	for (let templateZipPath of templateZipPaths) {
-		const name = path.basename(templateZipPath, path.extname(templateZipPath)); // /path/to/javascript.zip -> javascript
+const testCases = templateZipPaths.map(p => [path.basename(p, path.extname(p)), p]); // /path/to/javascript.zip -> javascript
 
-		it(`check the directory structure of the "${name}"`, async () => {
+describe("check distribution", () => {
+	it.each(testCases)(
+		`check the directory structure of the "%s"`,
+		async (name, templateZipPath) => {
 			const data = fs.readFileSync(templateZipPath);
 			const zip = await jszip.loadAsync(data);
 			// root にテンプレート名のディレクトリが存在することを確認
-			expect(zip.files[name + "/"]).not.toBeUndefined();
+			expect(zip.files[name + "/"]).toBeDefined();
 			// テンプレート名のディレクトリ直下に game.json が存在することを確認
-			expect(zip.files[name + "/game.json"]).not.toBeUndefined();
+			expect(zip.files[name + "/game.json"]).toBeDefined();
 			// package-lock.json が存在しないことを確認
 			expect(zip.files[name + "/package-lock.json"]).toBeUndefined();
-		});
-	}
+		}
+	);
 });

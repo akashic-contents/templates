@@ -23,7 +23,7 @@ const templateListJsonBaseUrl = "https://github.com/akashic-contents/templates/r
 	const existsZips = (await fs.readdir(outputDir, { withFileTypes: true }))
 		.filter(dirent => /\.zip$/.test(dirent.name))
 		.map(dirent => path.join(outputDir, dirent.name));
-	
+
 	for (let existsZip of existsZips) {
 		await fs.unlink(existsZip);
 	}
