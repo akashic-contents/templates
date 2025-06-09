@@ -18,7 +18,12 @@ npm install
 以下のどちらかを実行後、ブラウザで `http://localhost:3000/game/` にアクセスすることでゲームを実行できます。
 
 * `npm start`
-* `npm install -g @akashic/akashic-sandbox` 後、 `akashic-sandbox .`
+* `npm install -g @akashic/akashic-cli-sandbox` 後、 `akashic-cli-sandbox .`
+
+また、マルチプレイゲームの確認では、以下のどちらかを実行後、ブラウザで `http://localhost:3300` にアクセスすることでゲームを実行できます。
+
+* `npm run start:multi`
+* `npm install -g @akashic/akashic-cli-serve`後、 `akashic-cli-serve .`
 
 ### テンプレートの使い方
 
