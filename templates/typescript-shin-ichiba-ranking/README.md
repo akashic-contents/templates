@@ -35,7 +35,7 @@ npm run build
 また、マルチプレイゲームの動作確認は `akashic-cli-serve` を利用します。以下のどちらかを実行後、ブラウザで `http://localhost:3300` にアクセスすることでゲームを実行できます。
 
 * `npm run start:multi`
-* `npm install -g @akashic/akashic-cli`後、 `akashic serve .`
+* `npm install -g @akashic/akashic-cli` 後、 `akashic serve .`
 
 ### テンプレートの使い方
 
