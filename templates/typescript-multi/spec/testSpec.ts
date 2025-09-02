@@ -10,7 +10,7 @@ describe("mainScene", () => {
 		// 放送者のプレイヤー情報
 		const broadcasterPlayer: RunnerPlayer = { id: "broadcaster-player-id", name: "broadcaster-player-name" };
 		// 参加者のプレイヤー情報
-		const otherPlayer: RunnerPlayer = { id: "other-player-name", name: "other-player-name" };
+		const otherPlayer: RunnerPlayer = { id: "other-player-id", name: "other-player-name" };
 
 		// Active クライアントの作成
 		const activeClient = await context.getGameClient();
