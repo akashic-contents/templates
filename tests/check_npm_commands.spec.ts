@@ -95,6 +95,7 @@ const templates: Template[] = [
 			"javascript-shin-ichiba-ranking": javascriptCommands,
 			"typescript": typescriptCommands,
 			"typescript-minimal": typescriptCommands,
+			"typescript-multi": typescriptCommands,
 			"typescript-shin-ichiba-ranking": typescriptCommands,
 		}
 	}
