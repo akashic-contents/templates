@@ -61,12 +61,6 @@ npm run build
 
 `typescript-multi-game-sample` をエクスポートするときは以下のコマンドを利用します。
 
-### htmlファイルのエクスポート
-
-`npm run export-html` のコマンドを利用することで `game` ディレクトリにエクスポートすることができます。
-
-`game/index.html` をブラウザで開くと単体動作させることができます。
-
 ### zipファイルのエクスポート
 
 `npm run export-zip` のコマンドを利用することで `game.zip` という名前のzipファイルを出力できます。
