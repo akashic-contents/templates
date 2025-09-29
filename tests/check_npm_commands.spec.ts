@@ -86,6 +86,8 @@ const typescriptCommands: Command[] = [
 	}
 ];
 
+const typescriptCommandsWithoutExportHTML = typescriptCommands.filter(cmd => !(cmd.command === "npm" && cmd.args[1] === "export-html"));
+
 const templates: Template[] = [
 	{
 		dir: "templates",
@@ -95,7 +97,7 @@ const templates: Template[] = [
 			"javascript-shin-ichiba-ranking": javascriptCommands,
 			"typescript": typescriptCommands,
 			"typescript-minimal": typescriptCommands,
-			"typescript-multi": typescriptCommands,
+			"typescript-multi": typescriptCommandsWithoutExportHTML,
 			"typescript-shin-ichiba-ranking": typescriptCommands,
 		}
 	}
