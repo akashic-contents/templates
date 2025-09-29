@@ -94,6 +94,7 @@ const templates: Template[] = [
 		commandMap: {
 			"javascript": javascriptCommands,
 			"javascript-minimal": javascriptCommands,
+			"javascript-multi": javascriptCommands,
 			"javascript-shin-ichiba-ranking": javascriptCommands,
 			"typescript": typescriptCommands,
 			"typescript-minimal": typescriptCommands,
