@@ -19,7 +19,7 @@ npm install
 
 * `npm start`
   * `http://localhost:3000` からアクセス
-  * 一人用ゲーム (ランキングゲーム) として起動
+  * 一人用ゲーム (ニコ生ゲームであればランキングゲーム) として起動
 * `npm run start:multi`
   * `http://localhost:3300` からアクセス
   * マルチプレイとして起動
