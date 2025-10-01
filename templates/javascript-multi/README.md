@@ -27,7 +27,7 @@ npm install
 ### テンプレートの使い方
 
 * ゲーム部分を作成する場合は `script/main.js` を編集してください。
-  * 基本的に `script/_bootstrap.ts` を編集する必要はありません。
+  * 基本的に `script/_bootstrap.js` を編集する必要はありません。
 * このテンプレートでは `script/main.js` の `main` 関数の引数 `param` に以下の値が新たに付与されています。
   * `broadcasterId`
     * 放送者のプレイヤー ID
