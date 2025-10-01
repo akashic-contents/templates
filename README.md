@@ -9,9 +9,11 @@ Akashic ゲームのテンプレートリポジトリ。
 * [template-list.json](https://akashic-contents.github.io/templates/template-list.json)
   * `javascript`
   * `javascript-minimal`
+  * `javascript-multi`
   * `javascript-shin-ichiba-ranking`
   * `typescript`
   * `typescript-minimal`
+  * `typescript-multi`
   * `typescript-shin-ichiba-ranking`
 
 ## 開発者向け
