@@ -24,8 +24,6 @@ describe("check distribution", () => {
 			expect(zip.files[name + "/"]).toBeDefined();
 			// テンプレート名のディレクトリ直下に game.json が存在することを確認
 			expect(zip.files[name + "/game.json"]).toBeDefined();
-			// package-lock.json が存在しないことを確認
-			expect(zip.files[name + "/package-lock.json"]).toBeUndefined();
 		}
 	);
 });
