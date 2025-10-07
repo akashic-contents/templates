@@ -2,6 +2,7 @@ import * as fs from "fs";
 import * as path from "path";
 import * as jszip from "jszip";
 
+// for test
 const templateDir = path.join(__dirname, "..", "dist");
 
 const templateZipPaths = fs.readdirSync(templateDir, { withFileTypes: true })
