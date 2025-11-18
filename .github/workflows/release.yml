@@ -7,6 +7,9 @@ on:
     types:
       - closed
 
+permissions:
+  contents: write
+
 jobs:
   release:
     # PullRequest に release ラベルが付与されている場合のみ実行
@@ -14,11 +17,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
-      - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
-          node-version: '22'
+          persist-credentials: false
+      - name: Setup Node
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
+        with:
+          node-version: '24'
           cache: npm
       - name: Install project
         run: |
@@ -30,7 +35,7 @@ jobs:
         run: |
           TODAY=$(date '+%Y-%m-%d')
           echo "today=${TODAY}" >> $GITHUB_OUTPUT
-      - uses: ncipollo/release-action@v1
+      - uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1.20.0
         with:
           artifacts: "dist/*.zip"
           name: "Release (${{ steps.variables.outputs.today }})"
