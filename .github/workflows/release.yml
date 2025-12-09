@@ -35,12 +35,18 @@ jobs:
         run: |
           TODAY=$(date '+%Y-%m-%d')
           echo "today=${TODAY}" >> $GITHUB_OUTPUT
-      - uses: ncipollo/release-action@b7eabc95ff50cbeeedec83973935c8f306dfcd0b # v1.20.0
-        with:
-          artifacts: "dist/*.zip"
-          name: "Release (${{ steps.variables.outputs.today }})"
-          tag: ${{ steps.variables.outputs.today }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          allowUpdates: true
-          removeArtifacts: true
-          replacesArtifacts: true
+      - name: Upload ZIP files
+        run: |
+          if gh release view "${TAG_NAME}" > /dev/null 2>&1; then
+            gh release view "${TAG_NAME}" --json assets -q '.assets[].name' | while read asset; do
+              if [ -n "$asset" ]; then
+                gh release delete-asset "${TAG_NAME}" "$asset" -y
+              fi
+            done
+            gh release upload "${TAG_NAME}" dist/*.zip --clobber
+          else
+            gh release create "${TAG_NAME}" dist/*.zip --title "Release (${TAG_NAME})"
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG_NAME: ${{ steps.variables.outputs.today }}
