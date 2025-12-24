@@ -115,7 +115,7 @@ function main(param) {
                 // 移動先との差分を計算します
                 const dx = forwardTo.x - character.x;
                 const dy = forwardTo.y - character.y;
-                const dist = Math.sqrt(dx * dx + dy * dy); // eslint-disable-line akashic/warn-global-math
+                const dist = Math.sqrt(dx * dx + dy * dy);
                 if (dist > speed) {
                     // 一定速度で近づきます
                     character.x += (dx / dist) * speed;
