@@ -17,7 +17,7 @@
   "author": "",
   "license": "",
   "devDependencies": {
-    "@akashic/akashic-cli": "^3.0.6",
+    "@akashic/akashic-cli": "^3.0.19",
     "@akashic/akashic-engine": "^3.6.0",
     "@akashic/eslint-config": "../akashic-eslint-config-3.1.0.tgz",
     "@akashic/headless-akashic": "^4.0.0",
