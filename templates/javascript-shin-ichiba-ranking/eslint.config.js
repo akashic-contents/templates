@@ -1,4 +1,5 @@
 const globals = require("globals");
+const warnGlobalMathRule  = require("@akashic/eslint-config/rules/warn-global-math.js");
 
 module.exports = [
   {
@@ -11,6 +12,13 @@ module.exports = [
       ecmaVersion: 6,
       sourceType: "module",
     },
+    plugins: {
+      "akashic": {
+				rules: {
+					"warn-global-math": warnGlobalMathRule
+				}
+			}
+    },
     rules: {
       "no-dupe-args": "error",
       "no-dupe-keys": "error",
@@ -22,7 +30,8 @@ module.exports = [
           skipRegExps: true,
           skipTemplates: true
       }],
-      "no-undef": "error"
+      "no-undef": "error",
+      "akashic/warn-global-math": "warn"
     }
   }
 ];

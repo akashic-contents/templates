@@ -2,7 +2,8 @@ import typescriptEslint from "@typescript-eslint/eslint-plugin";
 import importPlugin from "eslint-plugin-import";
 import globals from "globals";
 import tsParser from "@typescript-eslint/parser";
-import stylisticTs from "@stylistic/eslint-plugin-ts";
+import stylistic from "@stylistic/eslint-plugin";
+import warnGlobalMathRule from "@akashic/eslint-config/rules/warn-global-math.js"
 
 export default [
   {
@@ -13,7 +14,12 @@ export default [
     files: ["src/**/*.ts"],
     plugins: {
       "@typescript-eslint": typescriptEslint,
-      "@stylistic/ts": stylisticTs
+      "@stylistic": stylistic,
+      "akashic": {
+				rules: {
+					"warn-global-math": warnGlobalMathRule
+				}
+			}
     },
 
     languageOptions: {
@@ -31,10 +37,10 @@ export default [
     },
 
     rules: {
-      "@stylistic/ts/quotes": ["error", "double"],
-      "@stylistic/ts/semi": ["error"],
-      "@stylistic/ts/type-annotation-spacing": ["error"],
-      "@stylistic/ts/member-delimiter-style": ["error", {
+      "@stylistic/quotes": ["error", "double"],
+      "@stylistic/semi": ["error"],
+      "@stylistic/type-annotation-spacing": ["error"],
+      "@stylistic/member-delimiter-style": ["error", {
         multiline: {
           delimiter: "semi",
           requireLast: true,
@@ -57,7 +63,7 @@ export default [
           },
         },
       }],
-      "@stylistic/ts/indent": ["error", "tab", {
+      "@stylistic/indent": ["error", "tab", {
         FunctionDeclaration: {
           parameters: "first",
         },
@@ -171,7 +177,8 @@ export default [
           caseInsensitive: true
         }
       }],
-      "import/no-unresolved": "off"
+      "import/no-unresolved": "off",
+      "akashic/warn-global-math": "warn"
     }
   }
 ];
