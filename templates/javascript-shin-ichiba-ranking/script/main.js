@@ -6,7 +6,6 @@ function main(param) {
         // このシーンで利用するアセットのIDを列挙し、シーンに通知します
         assetIds: ["player", "shot", "se"]
     });
-    g.Math.initialize();
     let time = 60; // 制限時間
     if (param.sessionParameter.totalTimeLimit) {
         time = param.sessionParameter.totalTimeLimit; // セッションパラメータで制限時間が指定されたらその値を使用します

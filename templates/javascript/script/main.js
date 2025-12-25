@@ -4,7 +4,6 @@ function main(param) {
         // このシーンで利用するアセットのIDを列挙し、シーンに通知します
         assetIds: ["player", "shot", "se"]
     });
-    g.Math.initialize();
     scene.onLoad.add(() => {
         // ここからゲーム内容を記述します
         // 各アセットオブジェクトを取得します
