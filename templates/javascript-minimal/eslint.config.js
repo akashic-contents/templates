@@ -14,10 +14,10 @@ module.exports = [
     },
     plugins: {
       "akashic": {
-				rules: {
-					"warn-global-math": warnGlobalMathRule
-				}
-			}
+        rules: {
+          "warn-global-math": warnGlobalMathRule
+        }
+      }
     },
     rules: {
       "no-dupe-args": "error",

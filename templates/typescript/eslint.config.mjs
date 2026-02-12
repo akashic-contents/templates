@@ -16,10 +16,10 @@ export default [
       "@typescript-eslint": typescriptEslint,
       "@stylistic": stylistic,
       "akashic": {
-				rules: {
-					"warn-global-math": warnGlobalMathRule
-				}
-			}
+        rules: {
+          "warn-global-math": warnGlobalMathRule
+        }
+      }
     },
 
     languageOptions: {
