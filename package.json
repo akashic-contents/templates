@@ -40,6 +40,9 @@
       "<rootDir>/tests/*.spec.ts"
     ]
   },
+  "allowScripts": {
+    "esbuild@0.25.2": true
+  },
   "devEngines": {
     "packageManager": {
       "name": "npm",
