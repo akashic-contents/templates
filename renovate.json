@@ -4,16 +4,27 @@
     "github>akashic-games/renovate-config:groupPatchMinor",
     "github>akashic-games/renovate-config:bumpAkashicPatch"
   ],
-  "addLabels": ["release"],
+  "addLabels": [
+    "release"
+  ],
   "automerge": true,
   "packageRules": [
     {
-      "matchPackagePatterns": ["eslint"],
+      "matchPackagePatterns": [
+        "eslint"
+      ],
       "groupName": "eslint packages"
     },
     {
-      "matchPackagePatterns": ["jest"],
+      "matchPackagePatterns": [
+        "jest"
+      ],
       "groupName": "jest packages"
     }
-  ]
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "minimumReleaseAge": null,
+    "prPriority": 10
+  }
 }
